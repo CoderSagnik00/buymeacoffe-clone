@@ -1,0 +1,26 @@
+{
+  "name": "buymeacoffe-clone",
+  "version": "1.0.0",
+  "description": "This is a clone website of https://buymeacoffee.com/",
+  "main": "./backend/server.js",
+  "scripts": {
+    "dev": "nodemon app"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CoderSagnik00/buymeacoffe-clone.git"
+  },
+  "author": "CoderSagnik00 (RK800)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CoderSagnik00/buymeacoffe-clone/issues"
+  },
+  "homepage": "https://github.com/CoderSagnik00/buymeacoffe-clone#readme",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
