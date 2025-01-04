@@ -1,5 +1,5 @@
 
-const users = []
+import users from "../db/temp-user-data.js";
 
 export const getUserUsingId = (req, res) => {
     const { id } = req.body
@@ -10,7 +10,7 @@ export const getUserUsingId = (req, res) => {
 
     }
 
-    const data = users.find(x => x.id === id);
+    const data = users.find(x => x['id'] === Number(id));
     if (!data) {
         return res.status(404).json({ success: false, error: "Can't find the user" });
     }
@@ -41,4 +41,37 @@ export const addNewUser = (req, res) => {
     const id = users.length === 0 ? 1 : users.length + 1;
     users.push({ id: id, username: username, email: email, password: password });
     return res.status(201).json({ success: true, msg: "User Successfully Created" });
-} 
+}
+
+
+export const editUserData = (req, res) => {
+    const { id, edit } = req.query;
+    const { value } = req.body;
+    if (!id) {
+        return res.status(400).json({ success: false, error: "Missing query: 'id'" });
+    }
+    if (!edit) {
+        return res.status(400).json({ success: false, error: "Missing query: 'edit'" });
+    }
+    if (!value) {
+        return res.status(400).json({ success: false, error: "Missing param: 'value'" });
+    }
+
+    const user = users.find(x => x['id'] === Number(id));
+
+    if (!user) {
+        return res.status(404).json({ success: false, error: "User Not Found" });
+    }
+
+    if (edit === 'email') {
+        user['email'] = value;
+        return res.status(200).json({ success: true, msg: "Email Successfully Updated" });
+    }
+    if (edit === 'password') {
+        user['password'] = value;
+        return res.status(200).json({ success: true, msg: "Password Successfully Updated" });
+    }
+
+    return res.status(404).json({ success: false, msg: "Edit var not found" });
+
+}  
